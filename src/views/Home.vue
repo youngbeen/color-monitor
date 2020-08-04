@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <input type="text" class="input" v-model="colorStr" :placeholder="placeholder">
+    <!-- <input type="text" class="input" v-model="colorStr" :placeholder="placeholder"> -->
+    <textarea class="input" v-model="colorStr" :placeholder="placeholder"></textarea>
     <div class="box-input">
       <input type="checkbox" id="chkbox" v-model="showColorValue"><label for="chkbox" class="label">Show color value</label>
     </div>
@@ -15,7 +16,7 @@
         <div class="title" v-for="n in maxCol" :key="n">{{ n }}</div>
       </div>
       <div class="row" v-for="(r, index) in colors" :key="index">
-        <div class="item" v-for="(c, i) in r" :key="i" :style="{ background: c }" @click="copyColor(c.toLowerCase())">
+        <div class="item" :title="c.toLowerCase()" v-for="(c, i) in r" :key="i" :style="{ background: c }" @click="copyColor(c.toLowerCase())">
           <div class="value">{{ showColorValue ? c.toLowerCase() : '' }}</div>
         </div>
       </div>
@@ -26,8 +27,9 @@
 <script>
 import { clipboard } from '@youngbeen/angle-ctrl'
 
-// '#1b87fc', '#79c1eb', '#4af3bb', '#c6f34a', '#e6e6e6', '#f39c4a', '#eb75d7', '#eb757f', '#4af300', '#af4af3' - , , black, rgb(255, 25, 53), yellow, rgba(0, 0,0, .3), hsl(0, 9%, 29%)
-
+/* #1b87fc', '#79c1eb', '#4af3bb', '#c6f34a', '#e6e6e6', '#f39c4a', '#eb75d7', '#eb757f', '#4af300', '#af4af3'-
+, , black, rgb(255, 25, 53), yellow, rgba(244, 255,178, .3), hsl(0, 9%, 29%)-
+blue, , #fff */
 export default {
   data () {
     return {
@@ -82,10 +84,12 @@ export default {
 .home {
   padding: 16px 32px;
   .input {
-    display: block;
+    // display: block;
     width: 100%;
+    height: 60px;
     padding: 6px;
     font-size: 14px;
+    resize: none;
   }
   .box-input {
     display: flex;
@@ -101,6 +105,7 @@ export default {
     // flex-direction: column;
     // flex-wrap: wrap;
     padding-top: 8px;
+    // overflow: auto;
     .box-tips {
       padding: 4px 0;
       .tip {
@@ -110,11 +115,12 @@ export default {
     }
     .row {
       display: flex;
+      flex-wrap: wrap;
       &.row-title {
         margin-bottom: 2px;
       }
       .title {
-        width: 100px;
+        width: 90px;
         height: 18px;
         line-height: 18px;
         text-align: center;
@@ -126,7 +132,7 @@ export default {
         }
       }
       .item {
-        width: 100px;
+        width: 90px;
         height: 30px;
         .value {
           height: 100%;
@@ -137,6 +143,9 @@ export default {
           font-size: 12px;
           // font-weight: bold;
           // text-shadow: -1px -1px 1px #fff;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
       }
     }
