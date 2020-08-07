@@ -2,7 +2,7 @@
   "name": "color-monitor",
   "description": "Color monitor is an app to comparing css colors for front-end work",
   "author": "youngbeen",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
